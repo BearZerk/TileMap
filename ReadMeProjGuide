@@ -1,0 +1,15 @@
+# TileMap
+Personal TileMap project for 2D potential 3D extension
+
+Project Plan Overview
+    - Create 2D TileManager (sidescroller/platformer potential) [Master]
+        - Extend to 3D TileManager (Voxel based idea, similar to CubeWorld Alpha by Wolfram) [Branch]
+            - Extend 3D TileManager to use Perlin Noise which can start to populate a landscape? [Branch]
+
+Tile Manager
+  - 2D Array
+  - Populate with TileObjects
+  - OnStart() - draw contents of 2D array to screen. 
+  //Need to research how to edit tilemange within scene view so maps can be created.
+    ////Custom Brush & Custom Inspector
+  //if array[][] has no gameobject draw an empty object -> no components, alpha sprite with translucent boarder
