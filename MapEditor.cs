@@ -9,6 +9,7 @@ public class MapEditor : Editor {
     GameObject[] prefabs;
     //Create a single gameobject for the active tile being used
     GameObject selectedPrefab;
+    GameObject selectedGameObject;
     //Create a list of Spawned tiles
     ////CONSIDER USING A 2D ARRAY PERHAPS FOR CLARITY? OR WOULD A LIST SUIT? WOULD THE LIST HOLD EMPTY OBJECTS AND WRAP AT THE POINT OF LINE-BREAK?
     List<GameObject> spawnedGO = new List<GameObject>();
@@ -32,21 +33,55 @@ public class MapEditor : Editor {
         }
 
         //Create buttons in order to be able to select an active tile to be used
-        GUILayout.BeginHorizontal(); 
         //If our array of prefabs isn't empty
-        if(prefabs != null)
+        int buttonsInRow = 0;
+        GUILayout.BeginHorizontal();
+        if (prefabs != null)
         {
             for (int i = 0; i < prefabs.Length; i++)
             {
                 /////THIS WORKS, ALTHOUGH IT'S HIGHLY DEPENDANT UPON HOW THE SPRITE WAS IMPORTED - SINGLE (FINE), MULTIPLE (VIEW OF ENTIRE INDEX/ATLAS OF SPRITES)
                 prefabTexture = prefabs[i].GetComponent<SpriteRenderer>().sprite.texture;
-                if(GUILayout.Button(prefabTexture, GUILayout.MaxWidth(50), GUILayout.MaxHeight(50)))
+                if (GUILayout.Button(prefabTexture, GUILayout.MaxWidth(50), GUILayout.MaxHeight(50)))
                 {
                     selectedPrefab = prefabs[i];
-                    EditorWindow.FocusWindowIfItsOpen(typeof(Editor));
+                    ////THIS DOESN'T WORK. NEED IT TO FOCUS ON THE INSPECTOR AS THE "MAP SCRIPT" COMPONENT HAS FURTHER TILES ===> Problem not here, this is at button not at create point
+                    EditorWindow.FocusWindowIfItsOpen(typeof(MapEditor));
                 }
-            }   
+                buttonsInRow++;
+                if(buttonsInRow == 3)
+                {
+                    GUILayout.EndHorizontal();
+                    GUILayout.BeginHorizontal();
+                    buttonsInRow = 0;
+                }
+            }
         }
         GUILayout.EndHorizontal();
+    }
+
+    //Method for handling events in the scene view
+    private void OnSceneGUI()
+    {
+        //Get 2D position of where the mouse is currently pointing.
+        Vector2 spawnPosition = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition).origin;
+        //Event on user input, is it 
+        if (Event.current.type == EventType.MouseDown)
+        {
+            //run spawn procedure
+            Spawn(spawnPosition);
+        }
+    }
+
+    //Create an object
+    void Spawn(Vector2 _spawnPosition)
+    {
+        //Object being created is instantiated, it's the selected prefab, and it's at the x & y coordinates of where was last clicked in Scene
+        GameObject go = (GameObject)Instantiate(selectedPrefab, new Vector2(_spawnPosition.x, _spawnPosition.y), selectedPrefab.transform.rotation);
+        selectedGameObject = go;
+        //Rename object
+        go.name = selectedPrefab.name;
+        //Add it to our list
+        spawnedGO.Add(go);
     }
 }
