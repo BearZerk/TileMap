@@ -19,7 +19,12 @@ Tile Manager
     through Yudiz (http://www.yudiz.com/making-a-basic-2d-tile-map-editor-using-a-custom-inspector/) Used most of this as a tutorial, 
     need to complete the tutorial to appreciate what parts of my plan are missing, what parts can be transposed and what parts fall 
     woefully short of my needs for now (that can be built upon).
-
+    
 31/08/2017:
     Tutorial has been completed, but with large issues in place, these will form the basis of transforming this into my own solution.
     All issues can be found in the tut branch. This will be merged back to master at the point of having a base personalised solution. 
+    
+08/11/2017:
+    Short & Sweet - The version of the tile manager now works with snapping when drawing in scene-view, from the small bit of testing
+    I've done the drawing is slightly imperfect, need to maybe draw some large scale levels to see if this still works. Also there's now
+    a CS file in this branch that needs to be deleted
