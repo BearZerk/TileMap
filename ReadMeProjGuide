@@ -28,3 +28,9 @@ Tile Manager
     Short & Sweet - The version of the tile manager now works with snapping when drawing in scene-view, from the small bit of testing
     I've done the drawing is slightly imperfect, need to maybe draw some large scale levels to see if this still works. Also there's now
     a CS file in this branch that needs to be deleted
+    
+09/01/2017:
+    After a prolonged holiday break, back to getting this tool into working order in my spare time. It's very close to being a working
+    prototype of what it should eventually be, at this point it's getting the GridManager to create and handle tiles correctly and new
+    grid objects, and to ensure the math behind the grid objects is valid (1st try - hope springs eternal). Should be able to get working
+    soon, feeling very positive about coming results. 
